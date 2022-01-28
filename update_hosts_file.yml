@@ -1,7 +1,7 @@
 ---
 - name: Generate Hosts File
   hosts: k8s
-  become: true
+  become_method: sudo
   gather_facts: true
   vars:
     my_file: /etc/hosts
@@ -14,4 +14,3 @@
         owner: root
         group: root
         mode: "0644"
-
