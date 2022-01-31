@@ -54,8 +54,8 @@
       selinux:
         state: disabled
 
-    - name: Reboot the machine
-      reboot:
+    #- name: Reboot the machine
+    #  reboot:
 
     - name: Copy /etc/yum.repos.d/kubernetes.repo
       copy:
