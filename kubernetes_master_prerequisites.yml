@@ -59,7 +59,7 @@
 
     - name: Copy /etc/yum.repos.d/kubernetes.repo
       copy:
-        src: /opt/ansible/files/kubernetes.repo
+        src: ./files/kubernetes.repo
         dest: /etc/yum.repos.d/kubernetes.repo
         owner: root
         group: root
@@ -86,7 +86,7 @@
 
     - name: Letting iptables see bridged traffic
       copy:
-        src: /opt/k8s/files/k8s.conf
+        src: ./files/k8s.conf
         dest: /etc/sysctl.d/k8s.conf
         owner: root
         group: root
