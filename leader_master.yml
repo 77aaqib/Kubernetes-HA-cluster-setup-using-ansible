@@ -6,8 +6,14 @@
   vars:
     nodeip: var=ansible_eth1.ipv4.address
   tasks:
+    - name: Remove pre-existing kubernetes files
+      shell: rm /etc/kubernetes/manifests/kube-apiserver.yaml
+      shell: rm /etc/kubernetes/manifests/kube-controller-manager.yaml
+      shell: rm /etc/kubernetes/manifests/kube-scheduler.yaml
+      shell: rm /etc/kubernetes/manifests/etcd.yaml
+
     - name: Initializing Kubernetes cluster
-      shell: kubeadm init --control-plane-endpoint "haproxy.k8slabs.in:80" --upload-certs --apiserver-advertise-address {{ansible_default_ipv4.address}} --pod-network-cidr 192.168.0.0/16 --service-cidr 192.168.2.0/24
+      shell: kubeadm init --control-plane-endpoint cohaproxy:80 --upload-certs --apiserver-advertise-address {{ansible_default_ipv4.address}} --pod-network-cidr 192.168.0.0/16 --service-cidr 192.168.2.0/24
       register: output
     - name: Storing Logs and Generated token for future purpose.
       local_action: copy content={{ output.stdout }} dest="./token"

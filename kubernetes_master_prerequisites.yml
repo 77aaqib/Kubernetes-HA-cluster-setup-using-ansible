@@ -65,6 +65,14 @@
         group: root
         mode: '0644'
 
+    - name: Copy /etc/docker/daemon.json
+      copy:
+        src: ./files/daemon.repo
+        dest: /etc/docker/daemon.json
+        owner: root
+        group: root
+        mode: '0644'
+
     - name: Upgrade all packages
       yum: name=* state=latest
 
