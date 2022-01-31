@@ -1,7 +1,7 @@
 ---
 - name: Generate Hosts File
   hosts: haproxy
-  become: true
+  become_method: sudo
   gather_facts: true
   vars:
     my_file: /etc/haproxy/haproxy.cfg
