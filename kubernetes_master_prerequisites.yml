@@ -20,7 +20,7 @@
     - name: Remove older Docker if any
       package:
         name: docker
-        state: abscent
+        state: absent
       become: yes
 
     - name: Add Docker repo
