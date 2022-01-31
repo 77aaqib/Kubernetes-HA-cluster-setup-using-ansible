@@ -17,6 +17,12 @@
         name: device-mapper-persistent-data
         state: latest
 
+    - name: Remove older Docker if any
+      package:
+        name: docker
+        state: abscent
+      become: yes
+
     - name: Add Docker repo
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -88,7 +94,7 @@
 
     - name: Reload sysctl config for iptables
       command: sysctl --system
-      
+
     - name: Disable SWAP
       command: swapoff -a
 
