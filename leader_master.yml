@@ -1,7 +1,7 @@
 ---
 - name: Generate Hosts File
   hosts: leader
-  become: true
+  become_method: sudo
   gather_facts: true
   vars:
     nodeip: var=ansible_eth1.ipv4.address
