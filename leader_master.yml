@@ -19,7 +19,7 @@
         command: kubeadm reset
         responses:
           Question:
-            - [reset] Are you sure you want to proceed? [y/N]: y
+            - Are you sure you want to proceed? [y/N]: y
 
     - name: Initializing Kubernetes cluster
       shell: kubeadm init --control-plane-endpoint cohaproxy:80 --upload-certs --apiserver-advertise-address {{ansible_default_ipv4.address}} --pod-network-cidr 192.168.0.0/16 --service-cidr 192.168.2.0/24
