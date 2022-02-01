@@ -85,7 +85,12 @@
           - kubelet
           - kubeadm
           - kubectl
-          - pexpect
+          - python3-pip
+
+
+    - name: Install pexpect
+      shell: pip3 install pexpect
+
 
     - name: Enable / Start kubelet Service
       service:
