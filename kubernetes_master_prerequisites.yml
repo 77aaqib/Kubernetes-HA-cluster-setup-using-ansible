@@ -76,7 +76,7 @@
     - name: Upgrade all packages
       yum: name=* state=latest
 
-    - name: Install Kubernetes Package
+    - name: Install Kubernetes Packages and some pre-requisite packages
       yum:
         name: "{{packages}}"
         state: present
@@ -85,6 +85,7 @@
           - kubelet
           - kubeadm
           - kubectl
+          - pexpect
 
     - name: Enable / Start kubelet Service
       service:

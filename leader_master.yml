@@ -7,12 +7,19 @@
     nodeip: var=ansible_eth1.ipv4.address
   tasks:
     - name: Remove pre-existing kubernetes files
-      shell: rm /etc/kubernetes/manifests/kube-apiserver.yaml
-      shell: rm /etc/kubernetes/manifests/kube-controller-manager.yaml
-      shell: rm /etc/kubernetes/manifests/kube-scheduler.yaml
-      shell: rm /etc/kubernetes/manifests/etcd.yaml
-      shell: sudo rm -rf /var/lib/etcd
-      shell: kubeadm reset
+      shell: |
+        sudo rm /etc/kubernetes/manifests/kube-apiserver.yaml
+        sudo rm /etc/kubernetes/manifests/kube-controller-manager.yaml
+        sudo rm /etc/kubernetes/manifests/kube-scheduler.yaml
+        sudo rm /etc/kubernetes/manifests/etcd.yaml
+        sudo rm -rf /var/lib/etcd
+
+    - name: Reset the kubeadm module
+      expect:
+        command: kubeadm reset
+        responses:
+          Question:
+            - [reset] Are you sure you want to proceed? [y/N]: y
 
     - name: Initializing Kubernetes cluster
       shell: kubeadm init --control-plane-endpoint cohaproxy:80 --upload-certs --apiserver-advertise-address {{ansible_default_ipv4.address}} --pod-network-cidr 192.168.0.0/16 --service-cidr 192.168.2.0/24
