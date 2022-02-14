@@ -2,13 +2,14 @@
 - name: Generate Hosts File
   hosts: member
   become: true
+  #become_user: testadmin
   gather_facts: true
   tasks:
     - name: Generated token - 1.
       local_action: shell sed -n 73,75p ./token > ./mastertoken
     - name: Copy master token
       copy:
-        src: /opt/k8s/mastertoken
+        src: ./token #/opt/k8s/mastertoken
         dest: /tmp/join-command.sh
         owner: root
         group: root
