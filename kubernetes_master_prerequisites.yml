@@ -111,4 +111,6 @@
 
     - name: Disable SWAP
       command: swapoff -a
+    - name: Reboot the machine
+      reboot:
 
